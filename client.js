@@ -13,36 +13,37 @@ var noteList = {
   },
 
   displayNote: function(position) {
-    console.log('Заметка ' + (position + 1));
-    console.log(this.notes[position].noteText);
+    return this.notes[position].noteText;
   }
 };
-
 
 var handlers = {
   addNote: function() {
     var addNoteTextInput = document.getElementById('addNoteTextInput');
     noteList.addNote(addNoteTextInput.value);
     addNoteTextInput.value = '';
-    view.displayNotes();
+    view.displayAllNotes();
   },
-  changeNote: function() {
-    var changeNotePositionInput = document.getElementById('changeNotePositionInput');
-    var changeNoteTextInput = document.getElementById('changeNoteTextInput');
-    noteList.changeNote(changeNotePositionInput.valueAsNumber, changeNoteTextInput.value);
-    changeNotePositionInput.value = '';
-    changeNoteTextInput.value = '';
-    view.displayNotes();
-
+  changeNote: function(position) {
+    var addNoteTextInput = document.getElementById('addNoteTextInput');
+    noteList.changeNote(position, addNoteTextInput.value);
+    addNoteTextInput.value = '';
+    view.displayAllNotes();
   },
   deleteNote: function(position) {
     noteList.deleteNote(position);
-    view.displayNotes();
+    view.displayAllNotes();
+  },
+  displayNote: function(position) {
+    view.displayNote(position);
+    saveButton.onclick = function() {
+      handlers.changeNote(position);
+    };
   }
 };
 
 var view = {
-  displayNotes: function() {
+  displayAllNotes: function() {
     var notesUl = document.querySelector('ul');
     notesUl.innerHTML = '';
     noteList.notes.forEach(function(note, position) {
@@ -51,7 +52,16 @@ var view = {
       noteLi.id = position;
       notesUl.appendChild(noteLi);
       noteLi.appendChild(this.createDeleteButton());
-    }, this)
+    }, this);
+    saveButton.onclick = function() {
+      handlers.addNote();
+    };
+  },
+  displayNote: function(position) {
+    // var selectedNote = document.getElementById(position);
+    // selectedNote.className = 'selected';
+    var textarea = document.getElementById('addNoteTextInput');
+    textarea.value = noteList.displayNote(position);
   },
   createDeleteButton: function() {
     var deleteButton = document.createElement('button');
@@ -64,7 +74,10 @@ var view = {
     notesUl.addEventListener('click', function(event) {
       var elementClicked = event.target;
       if (elementClicked.className === 'deleteButton') {
-        handlers.deleteNote(parseInt(elementClicked.parentNode.id));
+        handlers.deleteNote(parseInt(elementClicked.parentNode.id, 10));
+      }
+      if (elementClicked.nodeName === 'LI') {
+        handlers.displayNote(parseInt(elementClicked.id, 10));
       }
     });
   }

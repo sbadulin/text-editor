@@ -2,7 +2,7 @@
 <html>
 
   <head>
-    <title>Текстовый редактор</title>
+    <title>Редактор заметок</title>
     <link rel="stylesheet" href="style.css">
   </head>
 
@@ -12,13 +12,13 @@
     <div>
       <textarea id="addNoteTextInput" autofocus="true"></textarea>
       <div>
-        <button onclick="handlers.addNote()">Добавить</button>
+        <button id="saveButton">Сохранить</button>
+        <script>
+          saveButton.onclick = function() {
+            handlers.addNote();
+          }
+        </script>
       </div>
-    </div>
-    <div>
-      <button onclick="handlers.changeNote()">Изменить</button>
-      <input type="number" id="changeNotePositionInput">
-      <input type="text" id="changeNoteTextInput">
     </div>
 
     <ul>

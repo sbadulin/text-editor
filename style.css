@@ -7,11 +7,15 @@ textarea {
   height: 20vh;
 }
 
+#container {
+  margin: 0 auto;
+  width: 30vw;
+}
+
 .deleteButton {
   margin-left: 10px;
 }
 
-#container {
-  margin: 0 auto;
-  width: 30vw;
+.selected {
+  background-color: gray;
 }
