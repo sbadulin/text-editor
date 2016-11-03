@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Текстовый редактор</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+  <div id="container">
+    <h1>Текстовый редактор</h1>
+    <div>
+      <textarea id="addNoteTextInput" autofocus="true"></textarea>
+      <div>
+        <button onclick="handlers.addNote()">Добавить</button>
+      </div>
+    </div>
+    <div>
+      <button onclick="handlers.changeNote()">Изменить</button>
+      <input type="number" id="changeNotePositionInput">
+      <input type="text" id="changeNoteTextInput">
+    </div>
+
+    <ul>
+    </ul>
+  </div>
+    <script src="client.js"></script>
+  </body>
+
+</html>

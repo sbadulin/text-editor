@@ -1,0 +1,17 @@
+div {
+  margin-bottom: 20px;
+}
+
+textarea {
+  width: 100%;
+  height: 20vh;
+}
+
+.deleteButton {
+  margin-left: 10px;
+}
+
+#container {
+  margin: 0 auto;
+  width: 30vw;
+}
