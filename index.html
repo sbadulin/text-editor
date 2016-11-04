@@ -10,6 +10,7 @@
   <div id="container">
     <h1>Текстовый редактор</h1>
     <div>
+      <!-- <div id='fake_textarea' contenteditable></div> -->
       <textarea id="addNoteTextInput" autofocus="true"></textarea>
       <div>
         <button id="saveButton">Сохранить</button>
@@ -19,9 +20,11 @@
           }
         </script>
       </div>
+      <ul id="tags">
+      </ul>
     </div>
-
-    <ul>
+    <h2>Заметки</h2>
+    <ul id="notes">
     </ul>
   </div>
     <script src="client.js"></script>

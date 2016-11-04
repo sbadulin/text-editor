@@ -1,3 +1,7 @@
+html {
+  background-color: #fffbf2;
+}
+
 div {
   margin-bottom: 20px;
 }
@@ -9,13 +13,39 @@ textarea {
 
 #container {
   margin: 0 auto;
-  width: 30vw;
+  width: 50vw;
 }
 
-.deleteButton {
-  margin-left: 10px;
+ul {
+  padding: 0;
+}
+
+#tags li {
+  display: inline;
+  margin-right: 5px;
+  border: 1px solid #000;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+#notes li {
+  cursor: pointer;
+}
+
+.deleteButton, .tagDeleteButton {
+  margin-left: 6px;
 }
 
 .selected {
   background-color: gray;
+}
+
+#fake_textarea {
+  width: 100%;
+  height: 20vh;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  padding: 12px;
 }
