@@ -1,51 +1,81 @@
-html {
-  background-color: #fffbf2;
-}
-
-div {
-  margin-bottom: 20px;
-}
-
-textarea {
-  width: 100%;
-  height: 20vh;
+body {
+    background-color: #efefef;
+    font-family: Tahoma,Geneva,Kalimati,sans-serif
 }
 
 #container {
-  margin: 0 auto;
-  width: 50vw;
+    margin: 0 auto;
+    width: 50vw
+}
+
+h1,h2 {
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 10px
 }
 
 ul {
-  padding: 0;
+    padding: 0
+}
+
+#saveButton,#tags li {
+    border: none;
+    background-color: #5aa3d1;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 8px
 }
 
 #tags li {
-  display: inline;
-  margin-right: 5px;
-  border: 1px solid #000;
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
-  padding: 3px;
-  cursor: pointer;
+    display: inline;
+    margin-right: 5px;
+    padding: 4px 10px
 }
 
-#notes li {
-  cursor: pointer;
+#saveButton {
+    margin-top: 10px;
+    padding: 6px 20px;
+    border-bottom: 2px solid #3077b5
 }
 
-.deleteButton, .tagDeleteButton {
-  margin-left: 6px;
+:focus {
+    outline: 0
 }
 
-.selected {
-  background-color: gray;
+.deleteButton,.tagDeleteButton {
+    margin-left: 6px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 8px
+}
+
+.tagDeleteButton {
+    background-color: Transparent
+}
+
+.deleteButton {
+    font-variant-caps: all-small-caps;
+    background-color: #5aa3d1
+}
+
+#tags .selected {
+    background-color: gray
 }
 
 #addNoteTextInput {
-  width: 100%;
-  height: 20vh;
-  border: 1px solid #aaa;
-  background-color: #fff;
-  padding: 12px;
+    width: 100%;
+    height: 20vh;
+    border: 1px solid #aaa;
+    background-color: #fff;
+    padding: 12px
+}
+
+#notes li {
+    font-size: 18px;
+    line-height: 36px;
+    margin-left: 20px;
+    cursor: pointer
 }
