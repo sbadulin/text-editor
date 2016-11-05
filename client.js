@@ -1,19 +1,22 @@
 var noteList = {
-  notes: [],
+  notes: JSON.parse(localStorage.getItem('notes')) || [],
   addNote: function(noteText, tags) {
     this.notes.push({
       noteText: noteText,
       tags: tags
     });
+    localStorage.setItem('notes', JSON.stringify(this.notes));
   },
   changeNote: function(position, noteText, tags) {
     var changedNote = this.notes[position];
     changedNote.noteText = noteText;
     changedNote.tags = [];
     this.notes[position].tags = tags;
+    localStorage.setItem('notes', JSON.stringify(this.notes));
   },
   deleteNote: function(position) {
     this.notes.splice(position, 1);
+    localStorage.setItem('notes', JSON.stringify(this.notes));
   },
 
   displayNote: function(position) {
@@ -22,17 +25,19 @@ var noteList = {
 };
 
 var tagList = {
-  tags: [],
+  tags: JSON.parse(localStorage.getItem('tags')) || [],
   addTags: function(noteTags) {
     noteTags.forEach(function(tag) {
       if (!tagList.tags.includes(tag)) {
         tagList.tags.push(tag);
       }
     });
+    localStorage.setItem('tags', JSON.stringify(this.tags));
   },
   deleteTag: function(tag) {
     var index = this.tags.indexOf(tag);
     this.tags.splice(index, 1);
+    localStorage.setItem('tags', JSON.stringify(this.tags));
   }
 };
 
@@ -40,17 +45,17 @@ var handlers = {
   addNote: function() {
     var addNoteTextInput = document.getElementById('addNoteTextInput');
     var tags = this.findNoteTags();
-    noteList.addNote(addNoteTextInput.value, tags);
+    noteList.addNote(addNoteTextInput.innerText, tags);
     this.displayTagList();
-    addNoteTextInput.value = '';
+    addNoteTextInput.innerText = '';
     view.displayAllNotes();
   },
   changeNote: function(position) {
     var addNoteTextInput = document.getElementById('addNoteTextInput');
     var tags = this.findNoteTags();
-    noteList.changeNote(position, addNoteTextInput.value, tags);
+    noteList.changeNote(position, addNoteTextInput.innerText, tags);
     this.displayTagList();
-    addNoteTextInput.value = '';
+    addNoteTextInput.innerText = '';
     view.displayAllNotes();
   },
   deleteNote: function(position) {
@@ -64,7 +69,7 @@ var handlers = {
     };
   },
   findNoteTags: function() {
-    var noteTags = addNoteTextInput.value.match(/\#[a-zA-zа-яА-я0-9]+/g);
+    var noteTags = addNoteTextInput.innerText.match(/\#[a-zA-zа-яА-я0-9]+/g);
     if (noteTags) {
       tagList.addTags(noteTags);
     }
@@ -115,7 +120,18 @@ var view = {
   },
   displayNote: function(position) {
     var textarea = document.getElementById('addNoteTextInput');
-    textarea.value = noteList.displayNote(position);
+    var noteText = noteList.displayNote(position);
+    textarea.innerHTML = this.addTagsHighlight(noteText);
+  },
+  addTagsHighlight: function(noteText) {
+    var highlightedText = noteText.split(' ').map(function(word) {
+      if (tagList.tags.includes(word)) {
+        return ('<b>' + word + '</b>');
+      } else {
+        return word;
+      }
+    });
+    return highlightedText.join(' ');
   },
   createDeleteButton: function() {
     var deleteButton = document.createElement('button');
@@ -171,5 +187,6 @@ var view = {
     });
   }
 };
-
+handlers.displayTagList();
+view.displayAllNotes();
 view.setUpEventListeners();
